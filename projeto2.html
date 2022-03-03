@@ -1,0 +1,76 @@
+<meta charset="UTF-8">
+<script>
+
+    function quebraLinha() {
+        document.write("<br>");
+    }
+
+    function mostra(texto) {
+        document.write(texto);
+        quebraLinha();
+    }
+
+    function obterMedia(somaTotalValoresPesquisados, quantidadePostos) {
+        let media = Math.round(somaTotalValoresPesquisados / quantidadePostos);
+        mostra("A média dos valores pesquisados é: " + media);
+
+    }
+
+    function obterConsumoLitros(distanciaPercorrida, consumoVeiculo) {
+        let consumoNecessarioLitros = (distanciaPercorrida / consumoVeiculo);
+        mostra("O consumo necessário em litros para esse trajeto é : " + consumoNecessarioLitros + "L");
+
+    }
+
+    function obterMenorValor(quantidadePostos) {
+        let valorPesquisado;
+        let menorValor;
+        let somaTotalValoresPesquisados = 0;
+
+        for (let i = 0; i < quantidadePostos; i++) {
+            let numeroPosto = (i + 1);
+            valorPesquisado = obterValorPesquisado(numeroPosto);
+
+            while (isNaN(valorPesquisado)) {
+                alert("Erro, valor não numerico digitado!");
+
+                valorPesquisado = obterValorPesquisado(numeroPosto);
+                console.log(valorPesquisado);
+
+
+            }
+            somaTotalValoresPesquisados += valorPesquisado;
+
+            if (menorValor == undefined) {
+                menorValor = valorPesquisado;
+            } else if (menorValor > valorPesquisado) {
+                menorValor = valorPesquisado;
+            }
+
+            return somaTotalValoresPesquisados;
+        }
+
+        mostra("O menor valor pesquisado é R$ " + menorValor);
+        
+    }
+
+    function obterValorPesquisado(numeroPosto) {
+        return parseFloat(prompt("Digite o valor encontrado (em R$) no posto " + numeroPosto + "."));
+
+    }
+
+    function obterGastoDiario(consumoNecessarioLitros, menorValor) {
+        let gastoDiario = 2 * (consumoNecessarioLitros * menorValor);
+        mostra("O gasto diario (ida e volta) é " + gastoDiario);
+    }
+
+    let distanciaPercorrida = parseFloat(prompt("Qual a distância percorrida da sua casa até seu trabalho (em km)?"));
+    let consumoVeiculo = parseFloat(prompt("Qual o consumo médio do seu veiculo (em km/L)?"));
+    let quantidadePostos = parseInt(prompt("Em quantos postos você pesquisou ? "));
+    
+    obterGastoDiario(distanciaPercorrida,consumoVeiculo);
+    obterMenorValor(quantidadePostos);
+    obterMedia(somaTotalValoresPesquisados, quantidadePostos);
+    obterConsumoLitros(distanciaPercorrida, consumoVeiculo);
+    
+</script>
