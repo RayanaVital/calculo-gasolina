@@ -1,0 +1,94 @@
+<meta charset="UTF-8">
+<script>
+
+    function quebraLinha() {
+        document.write("<br>");
+    }
+
+    function mostra(texto) {
+        document.write(texto);
+        quebraLinha();
+    }
+
+    function mostraResultado(consumoNecessarioLitros, menorValor, media, gastoDiario) {
+
+        mostra("O consumo necessário em litros para esse trajeto é : " + consumoNecessarioLitros + "L");
+        mostra("O menor valor pesquisado é R$ " + menorValor);
+        mostra("A média dos valores pesquisados é: " + media);
+        mostra("O gasto diario (ida e volta) é " + gastoDiario);
+
+    }
+
+    function obterMedia(somaTotalValoresPesquisados, quantidadePostos) {
+        return somaTotalValoresPesquisados / quantidadePostos;
+    }
+
+    function obterGastoDiario(consumoNecessarioLitros, menorValor) {
+        let gastoDiario = 2 * (consumoNecessarioLitros * menorValor);
+
+        return gastoDiario;
+
+    }
+
+    function obterFloatPrompt(texto) {
+        parseFloat(prompt(texto));
+    }
+
+    function obterValorPesquisadoNumerico(numeroPosto) {
+        var valorPesquisado = obterValorPesquisado;
+        return valorPesquisado.replace(/[^0-9\.]/g, "");
+    }
+
+    function obterConsumoLitros(distanciaPercorrida, consumoVeiculo) {
+        return distanciaPercorrida / consumoVeiculo;
+    }
+
+    function obterMenorValor(quantidadePostos) {
+        let valorPesquisado;
+        let menorValor;
+        let somaTotalValoresPesquisados = 0;
+
+        for (let i = 0; i < quantidadePostos; i++) {
+            let numeroPosto = (i + 1);
+            valorPesquisado = obterValorPesquisado(numeroPosto);
+        }
+
+
+        while (Number.isNaN(valorPesquisado)) {
+            alert("Erro, valor não numerico digitado!");
+            valorPesquisado = obterFloatPrompt("Digite o valor encontrado (em R$) no posto " + numeroPosto);
+
+        }
+
+        somaTotalValoresPesquisados += valorPesquisado;
+
+        if (menorValor == undefined) {
+            menorValor = valorPesquisado;
+        } else if (menorValor > valorPesquisado) {
+            menorValor = valorPesquisado;
+        }
+
+
+        return menorValor
+    }
+
+    function showAlertNaN(number, displayText) {
+    }
+
+    function main() {
+        let distanciaPercorrida = obterFloatPrompt("Qual a distância percorrida da sua casa até seu trabalho (em km)?");
+        let consumoVeiculo = obterFloatPrompt("Qual o consumo médio do seu veiculo (em km/L)?");
+        let consumoNecessarioLitros = obterConsumoLitros(distanciaPercorrida, consumoVeiculo);
+        let quantidadePostos = parseInt(prompt("Em quantos postos você pesquisou ? "));
+        let menorValor = obterMenorValor(quantidadePostos);
+        let media = obterMedia();
+        let gastodiario = obterGastoDiario(consumoNecessarioLitros, menorValor);
+
+        mostra("O consumo necessário em litros para esse trajeto é : " + consumoNecessarioLitros + "L");
+        mostra("O menor valor pesquisado é R$ " + menorValor);
+        mostra("A média dos valores pesquisados é: " + media);
+        mostra("O gasto diario (ida e volta) é " + gastoDiario);
+    }
+
+
+</script>
