@@ -19,8 +19,25 @@
 
     }
 
-    function obterValorPesquisado(numeroPosto){
+    function obterValorPesquisado(numeroPosto) {
         return parseFloat(prompt("Digite o valor encontrado (em R$) no posto " + numeroPosto + "."));
+
+    }
+
+
+    function IsValorNan(valorPesquisado, numeroPosto){
+
+        while (isNaN(valorPesquisado)) {
+            alert("Erro, valor não numerico digitado!");
+
+            valorPesquisado = obterValorPesquisado(numeroPosto);
+            console.log("valor pesquisado: ", valorPesquisado);
+
+
+        }
+
+        return valorPesquisado;
+
 
     }
 
@@ -31,26 +48,32 @@
     let valorPesquisado;
     let menorValor;
     let somaTotalValoresPesquisados = 0;
-    
+
+    let valores = [];
+
     for (let i = 0; i < quantidadePostos; i++) {
         let numeroPosto = (i + 1);
-        valorPesquisado = obterValorPesquisado(numeroPosto);
+        valorPesquisado = valorIsNan(valorPesquisado, numeroPosto);
 
-        while (isNaN(valorPesquisado)) {
-            alert("Erro, valor não numerico digitado!");
-            
-            valorPesquisado = obterValorPesquisado(numeroPosto);
-            console.log(valorPesquisado);
-            
+        valores.push(valorPesquisado);
 
-        }
-        somaTotalValoresPesquisados += valorPesquisado;
+       
+       
+       
+        // if (menorValor == undefined) {
+        //     menorValor = valorPesquisado;
+        // } else if (menorValor > valorPesquisado) {
+        //     menorValor = valorPesquisado;
+        // }
+    }
 
-        if (menorValor == undefined) {
-            menorValor = valorPesquisado;
-        } else if (menorValor > valorPesquisado) {
-            menorValor = valorPesquisado;
-        }
+    menorValor = Math.min(...valores);
+
+    for (var posicao = 0; posicao < valores.length; posicao++) {
+
+        somaTotalValoresPesquisados += valores[posicao];
+        console.log("soma total: ", somaTotalValoresPesquisados);
+        
     }
 
     let media = (somaTotalValoresPesquisados / quantidadePostos);
